@@ -125,7 +125,7 @@ def main():
         username = input(Fore.RED + "Invalid username. Please enter another username." + Style.RESET_ALL)
     
     receiver_thread = th.Thread(target=receiver)
-    is_receiving = False
+    receiver_thread.start()
 
     while (not EXIT_APP):
         ipaddr = input(Fore.CYAN + "Enter ipaddress of the user you want to send messages to: " + Style.RESET_ALL)
@@ -164,9 +164,6 @@ def main():
 
         sender_thread = th.Thread(target=sender, args=(username, ipaddr))
         sender_thread.start()
-
-        if not is_receiving:
-            receiver_thread.start()
 
         # wait for sender thread to complete
         sender_thread.join()
