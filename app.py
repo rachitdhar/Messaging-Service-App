@@ -75,8 +75,7 @@ def sender(username, ipaddr):
     global EXIT_APP
 
     while True:
-        print(Fore.LIGHTMAGENTA_EX + "YOU ~" + username + " : " + Style.RESET_ALL)
-        msgInput = input()
+        msgInput = input(Fore.LIGHTMAGENTA_EX + "YOU ~" + username + " : " + Style.RESET_ALL)
 
         if msgInput == "!q":
             break
@@ -102,7 +101,7 @@ def receiver():
     hostname = socket.gethostname()
     server_address = (socket.gethostbyname(hostname), PORT)
     httpd = HTTPServer(server_address, RequestHandler)
-    print(Fore.GREEN + f'Starting httpd server on PORT {PORT}' + Style.RESET_ALL)
+    #print(Fore.GREEN + f'Starting httpd server on PORT {PORT}' + Style.RESET_ALL)
     httpd.serve_forever()
 
 
@@ -120,19 +119,16 @@ def displayHeading():
 def main():
     global EXIT_APP
     displayHeading()
-    print(Fore.LIGHTMAGENTA_EX + "Enter a username of your choice (will be visible to message receivers): " + Style.RESET_ALL)
-    username = input()
+    username = input(Fore.LIGHTMAGENTA_EX + "Enter a username of your choice (will be visible to message receivers): " + Style.RESET_ALL)
 
     while username == "APP_CONN_CHECK":
-        print(Fore.RED + "Invalid username. Please enter another username." + Style.RESET_ALL)
-        username = input()
+        username = input(Fore.RED + "Invalid username. Please enter another username." + Style.RESET_ALL)
     
     receiver_thread = th.Thread(target=receiver)
     is_receiving = False
 
     while (not EXIT_APP):
-        print(Fore.CYAN + "Enter ipaddress of the user you want to send messages to: " + Style.RESET_ALL)
-        ipaddr = input()
+        ipaddr = input(Fore.CYAN + "Enter ipaddress of the user you want to send messages to: " + Style.RESET_ALL)
 
         # checking if ipaddress is valid
         url = f"http://{ipaddr}:{PORT}/get-msg"
