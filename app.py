@@ -85,7 +85,7 @@ def sender(username, ipaddr):
             break
 
         payload = {'sentBy':username,'msg':msgInput}
-        url = f"http://{ipaddr}:{PORT}/"
+        url = f"http://{ipaddr}:{PORT}/get-msg"
 
         try:
             response = requests.post(url, json=payload, headers={"Content-Type": "application/json"})
